@@ -40,7 +40,7 @@
 		<div class="box">
 			<h3>teleport</h3>
 			<button @click="onShow">显示弹窗</button>
-			<the-dialog :show="show"></the-dialog>
+			<the-dialog v-model:show="show"></the-dialog>
 		</div>
 	</div>
 </template>
