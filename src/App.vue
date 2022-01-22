@@ -11,7 +11,7 @@
 			</nav>
 		</div>
 	</header>
-	<RouterView/>
+	<router-view/>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +21,22 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 <style>
 @import './assets/base.css';
+
+/*定义滚动条高宽及背景高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/*定义滑块颜色+圆角*/
+::-webkit-scrollbar-thumb {
+	background-color: #333333;
+}
+
+/*定义滚动条轨道内阴影+圆角*/
+::-webkit-scrollbar-track {
+	background-color: #969696;
+}
 
 #app {
 	max-width: 1280px;
