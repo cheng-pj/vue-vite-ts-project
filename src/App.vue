@@ -24,18 +24,20 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 /*定义滚动条高宽及背景高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+	width: 6px;
+	height: 6px;
 }
 
 /*定义滑块颜色+圆角*/
 ::-webkit-scrollbar-thumb {
-	background-color: #333333;
+	background-color: #E26A2C;
+	border-radius: 10px;
+	transition: all .2s ease-in-out;
 }
 
 /*定义滚动条轨道内阴影+圆角*/
 ::-webkit-scrollbar-track {
-	background-color: #969696;
+	background-color: #FFD07F;
 }
 
 #app {

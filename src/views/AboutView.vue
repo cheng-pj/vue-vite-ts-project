@@ -39,11 +39,12 @@
 		</div>
 		<div class="box">
 			<h3>teleport</h3>
-			<button>显示弹窗</button>
+			<button @click="onShow">显示弹窗</button>
+			<the-dialog :show="show"></the-dialog>
 		</div>
 	</div>
 </template>
-<script setup>
+<script setup lang="ts">
 import {
 	onActivated,
 	onBeforeMount,
@@ -58,6 +59,7 @@ import {
 	reactive,
 	ref
 } from 'vue'
+import TheDialog from '@/components/TheDialog.vue'
 
 // -----------------------------------
 const fruit = ref('')
@@ -93,7 +95,7 @@ const add = () => {
 	list.push(fruit.value)
 }
 // 删除列表
-const remove = (index) => {
+const remove = (index: number) => {
 	list.splice(index, 1)
 }
 
@@ -124,6 +126,11 @@ onActivated(() => console.log('onActivated'))
 
 // --------------------------------------------
 // 全局弹窗
+const show = ref(false)
+
+const onShow = () => {
+	show.value = true
+}
 </script>
 
 <style lang="scss">
