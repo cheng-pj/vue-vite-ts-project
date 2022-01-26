@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, ref, toRefs, watch} from 'vue'
+import {reactive, watch} from 'vue'
 
 const props = defineProps({
 	show: {
@@ -21,7 +21,6 @@ const props = defineProps({
 	}
 })
 const emit = defineEmits(['update:show'])
-
 
 const style = reactive({
 	zIndex: 2000,
@@ -32,12 +31,11 @@ watch(() => props.show, (val) => {
 		document.body.style.overflow = 'hidden'
 	} else {
 		document.body.style.overflow = 'auto'
-		emit('update:show', false)
 	}
 })
 
 const onClose = () => {
-
+	emit('update:show', false)
 }
 </script>
 

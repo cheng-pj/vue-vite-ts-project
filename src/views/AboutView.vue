@@ -1,46 +1,48 @@
 <template>
 	<div class="about">
-		<div class="box">
-			<h1>{{ state.count }}</h1>
-			<div style="display: flex;">
-				<button @click="onClick">点击增加</button>
-				<button @click="onReset">重置</button>
+		<div class="about-container">
+			<div class="box">
+				<h1>{{ state.count }}</h1>
+				<div style="display: flex;">
+					<button @click="onClick">点击增加</button>
+					<button @click="onReset">重置</button>
+				</div>
 			</div>
-		</div>
-		<div class="box">
-			<div style="display: flex;">
-				<div style="flex: 1;">
-					<h3>列表</h3>
-					<ul>
-						<li v-for="(item, index) in list" style="display: flex; align-items: center;">
-							<div>{{ index }}--{{ item }}</div>
-							<button @click="remove(index)">删除</button>
-						</li>
-					</ul>
-					<div>
-						<div class="input-text">
-							<input type="text" v-model="fruit"/>
-							<span class="tip" v-show="showRequire">请输入文本</span>
+			<div class="box">
+				<div style="display: flex;">
+					<div style="flex: 1;">
+						<h3>列表</h3>
+						<ul>
+							<li v-for="(item, index) in list" style="display: flex; align-items: center;">
+								<div>{{ index }}--{{ item }}</div>
+								<button @click="remove(index)">删除</button>
+							</li>
+						</ul>
+						<div>
+							<div class="input-text">
+								<input type="text" v-model="fruit"/>
+								<span class="tip" v-show="showRequire">请输入文本</span>
+							</div>
+							<button @click="add" style="margin-top: 10px;">添加</button>
 						</div>
-						<button @click="add" style="margin-top: 10px;">添加</button>
+					</div>
+					<div style="flex: 1;">
+						<h3>对象</h3>
+						<div>年龄: {{ person.age }}</div>
+						<div>性别: {{ person.gender }}</div>
+						<div>年龄: {{ person.age }}</div>
 					</div>
 				</div>
-				<div style="flex: 1;">
-					<h3>对象</h3>
-					<div>年龄: {{ person.age }}</div>
-					<div>性别: {{ person.gender }}</div>
-					<div>年龄: {{ person.age }}</div>
-				</div>
 			</div>
-		</div>
-		<div class="box">
-			{{ foo }}
-			<button @click="testRef">解构响应</button>
-		</div>
-		<div class="box">
-			<h3>teleport</h3>
-			<button @click="onShow">显示弹窗</button>
-			<the-dialog v-model:show="show"></the-dialog>
+			<div class="box">
+				{{ foo }}
+				<button @click="testRef">解构响应</button>
+			</div>
+			<div class="box">
+				<h3>teleport</h3>
+				<button @click="onShow">显示弹窗</button>
+				<the-dialog v-model:show="show"></the-dialog>
+			</div>
 		</div>
 	</div>
 </template>
@@ -131,22 +133,36 @@ const show = ref(false)
 const onShow = () => {
 	show.value = true
 }
+
+const test = reactive({
+	name: '名字',
+	gender: '性别'
+})
+
+onMounted(() => {
+	console.log(test?.name)
+})
 </script>
 
 <style lang="scss">
 @media (min-width: 1024px) {
 	.about {
-		min-height: 100vh;
+		height: 100vh;
 		display: flex;
 		align-items: center;
+		padding: 20px 0;
+		box-sizing: border-box;
 	}
 }
 
-.about {
+.about-container {
 	background-color: #FFD07F;
 	border-radius: 12px;
 	padding: 10px;
 	color: #333333;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
 
 	.box {
 		background-color: rgb(253, 166, 93, 0.5);
