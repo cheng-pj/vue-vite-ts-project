@@ -6,11 +6,13 @@
 		"build": "vue-tsc --noEmit && vite build",
 		"preview": "vite preview --port 5050",
 		"test:unit": "vitest --environment jsdom",
-		"test:e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
-		"test:e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run'",
+		"test:e2e": "start-server-and-test preview http://localhost:5050/ 'cypress open'",
+		"test:e2e:ci": "start-server-and-test preview http://localhost:5050/ 'cypress run'",
 		"typecheck": "vue-tsc --noEmit"
 	},
 	"dependencies": {
+		"axios": "^0.25.0",
+		"js-cookie": "^3.0.1",
 		"pinia": "^2.0.9",
 		"vue": "^3.2.27",
 		"vue-router": "^4.0.12"
