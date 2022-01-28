@@ -12,8 +12,11 @@
 	},
 	"dependencies": {
 		"axios": "^0.25.0",
+		"dayjs": "^1.10.7",
 		"js-cookie": "^3.0.1",
+		"normalize.css": "^8.0.1",
 		"pinia": "^2.0.9",
+		"swiper": "^7.4.1",
 		"vue": "^3.2.27",
 		"vue-router": "^4.0.12"
 	},
