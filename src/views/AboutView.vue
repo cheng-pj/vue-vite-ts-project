@@ -163,6 +163,7 @@ onMounted(() => {
 	height: 100%;
 	width: 100%;
 	overflow: auto;
+	box-sizing: border-box;
 
 	.box {
 		background-color: rgb(253, 166, 93, 0.5);
