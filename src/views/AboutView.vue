@@ -8,6 +8,7 @@
 					<button @click="onReset">重置</button>
 				</div>
 			</div>
+			<!--列表-->
 			<div class="box">
 				<div style="display: flex;">
 					<div style="flex: 1;">
@@ -20,7 +21,7 @@
 						</ul>
 						<div>
 							<div class="input-text">
-								<input type="text" v-model="fruit"/>
+								<input type="text" v-model="listItem"/>
 								<span class="tip" v-show="showRequire">请输入文本</span>
 							</div>
 							<button @click="add" style="margin-top: 10px;">添加</button>
@@ -43,6 +44,13 @@
 				<button @click="onShow">显示弹窗</button>
 				<the-dialog v-model:show="show"></the-dialog>
 			</div>
+			<div class="box" style="display: flex; flex-direction: column;">
+				<h3>学校信息</h3>
+				<input type="text" v-model="students.name" placeholder="姓名" style="margin: 5px 0;">
+				<input type="number" v-model="students.age" placeholder="年龄" style="margin: 5px 0;">
+				<input type="text" v-model="school" placeholder="学校名称" style="margin: 5px 0;">
+				<button @click="outObj" style="margin: 5px 0;">打印</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -60,46 +68,39 @@ import {
 	onUpdated,
 	reactive,
 	ref
-} from 'vue'
-import TheDialog from '@/components/TheDialog.vue'
+} from 'vue';
+import TheDialog from '@/components/TheDialog.vue';
+import useStudent from "@/views/composables/useStudent";
+import {useList} from '@/views/composables/useList';
+import {useCount} from "@/views/composables/useCount";
+
+// 生命周期
+onBeforeMount(() => console.log('beforeMount'))
+onMounted(() => console.log('onMounted'))
+onBeforeUnmount(() => console.log('onBeforeUnmount'))
+onUnmounted(() => console.log('unmounted'))
+onErrorCaptured(() => console.log('onErrorCaptured'))
+onRenderTracked(() => console.log('onRenderTracked'))	// 渲染跟踪
+onActivated(() => console.log('onActivated'))
+// 监听更新
+onBeforeUpdate(() => console.log('onBeforeUpdate'))
+onUpdated(() => console.log('onUpdated'))
+onRenderTriggered(() => console.log('onRenderTriggered')) // 渲染触发
+
+// 列表
+const {list, showRequire, listItem, remove, add} = useList()
+// 学生信息录入
+const {students, school, outObj} = useStudent()
+// 计数器
+const {state, onReset, onClick} = useCount()
 
 // -----------------------------------
-const fruit = ref('')
-const state = reactive({
-	count: 0,
-	arr: ['苹果', '橙子', '香蕉'],
-})
-// 点击
-const onClick = () => {
-	state.count++
-}
-// 重置
-const onReset = () => {
-	state.count = 0
-}
-
-// -----------------------------------
-const showRequire = ref(false)
 const person = reactive({
 	// 解构会失去响应式
 	name: '张三',
 	gender: '男',
 	age: 20
 })
-const list = reactive(['苹果', '橙子', '香蕉'])
-// 添加列表
-const add = () => {
-	if (!fruit.value) {
-		return showRequire.value = true
-	} else {
-		showRequire.value = false
-	}
-	list.push(fruit.value)
-}
-// 删除列表
-const remove = (index: number) => {
-	list.splice(index, 1)
-}
 
 //-------------------------------------------
 const obj = {
@@ -112,19 +113,6 @@ const {foo, bar} = obj
 const testRef = () => {
 	foo.value = foo.value + bar.value
 }
-
-// -----------------------------------------
-// 生命周期
-onBeforeMount(() => console.log('beforeMount'))
-onMounted(() => console.log('onMounted'))
-onBeforeUpdate(() => console.log('onBeforeUpdate'))
-onUpdated(() => console.log('onUpdated'))
-onBeforeUnmount(() => console.log('onBeforeUnmount'))
-onUnmounted(() => console.log('unmounted'))
-onErrorCaptured(() => console.log('onErrorCaptured'))
-onRenderTracked(() => console.log('onRenderTracked'))	// 渲染跟踪
-onRenderTriggered(() => console.log('onRenderTriggered')) // 渲染触发
-onActivated(() => console.log('onActivated'))
 
 // --------------------------------------------
 // 全局弹窗
@@ -142,6 +130,7 @@ const test = reactive({
 onMounted(() => {
 	console.log(test?.name)
 })
+
 </script>
 
 <style lang="scss">
@@ -219,6 +208,7 @@ onMounted(() => {
 		border: 1px solid #FDA65D;
 		background-color: #FFD07F;
 		padding: 5px;
+		height: 25px;
 	}
 }
 </style>
