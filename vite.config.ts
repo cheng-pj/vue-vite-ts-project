@@ -4,6 +4,8 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
+import {createSvgIconsPlugin} from "vite-plugin-svg-icons"
+
 function resolve(dir: any) {
 	return path.join(__dirname, dir)
 }
@@ -19,6 +21,11 @@ export default defineConfig(({command, mode}) => {
 				targets: ['ie >= 11'],
 				additionalLegacyPolyfills: ['regenerator-runtime/runtime']
 			}),
+			createSvgIconsPlugin({
+				iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+				symbolId: 'icon-[dir]-[name]',
+
+			})
 		],
 		resolve: {
 			alias: {
